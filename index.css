@@ -1,0 +1,25 @@
+@font-face {
+    font-family: Champion Gothic;
+    src: url('fonts/ChampionGothic-Heavyweight.ttf');
+}
+
+@font-face {
+    font-family: Rhesmanisa;
+    src: url('fonts/Rhesmanisa.otf');
+}
+
+@font-face {
+    font-family: FuturaLight;
+    src: url('fonts/futura-light-bt.ttf');
+}
+
+/*page css begins*/
+
+*{
+    box-sizing: border-box;
+}
+
+#levels-logo{
+    width: 5vw;
+    height: auto;
+}
