@@ -8,10 +8,18 @@
 
     <link href="index.css" rel="stylesheet">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <!--dark mode favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png" media="(prefers-color-scheme: dark)">
+
+    <!--light mode favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io_light/apple-touch-icon.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io_light/favicon-32x32.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io_light/favicon-16x16.png" media="(prefers-color-scheme: light)">
+    
     <link rel="manifest" href="favicon_io/site.webmanifest">
+
 </head>
 
 <body>
@@ -36,20 +44,40 @@
 
     <div id="wrapper">
 
+        <a href="#current-tab">
+            <button>Skip Navigation</button>
+        </a>
+
         <header>
             <img id="levels-logo" src="images/levels-logo.png" alt="the logo for levels music player">
             <h6>Levels Music Player</h6>
 
             <label for="search-songs">Search</label>
-            <input type="search" name="search-songs" id="search-songs" placeholder="Songs, Artists, Albums">
+            <input type="search" name="search-songs" id="search-songs" placeholder="Songs, Artists, Albums" aria-description="Search for songs, artists and/or albums">
         </header>
 
-        <nav>
-            <button>Home</button>
-            <button>Liked Songs</button>
-            <button>Recently Played</button>
+        <nav aria-label="Navigation Bar">
+            <ul>
+                <li>
+                    <a href="#">Home</a>
+                </li>
+
+                <li>
+                    <a href="#">Liked Songs</a>
+                </li>
+
+                <li>
+                    <a href="#">Recently Played</a>
+                </li>
+                
+            </ul>
         </nav>
         
+
+        <section id="current-tab">
+
+        </section>
+
     </div>
 
     
