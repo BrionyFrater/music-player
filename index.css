@@ -9,7 +9,16 @@
     src: url('fonts/RoclettePro-Medium.ttf');
 }
 
-/*page css begins*/
+@font-face {
+    font-family: RoclettePro-Light;
+    src: url('fonts/RoclettePro-Light.ttf');
+}
+
+/*
+========================================
+BASE PAGE CSS, nav, logos, and audio bar
+========================================
+*/
 
 *,
 *::before, 
@@ -25,11 +34,15 @@
 
     --clr-accent: #F24C27;
 
+    --clr-text: #fff;
+
     --fnt-big-bold: AkiraExpanded;
     --fnt-reg: RoclettePro-Medium;
+    --fnt-light: RoclettePro-Light;
 
     --gap: 5rem;
 }
+
 
 body{
     font-family: var(--fnt-reg);
@@ -64,8 +77,11 @@ nav{
     margin: 0;
 
     width: 100vw;
+
+    
     
 
+    
     background-color: var(--clr-accent);
     padding: 3vh;
     border-radius: 1rem 1rem 0 0;
@@ -77,5 +93,104 @@ nav ul{
     display: flex;
     list-style-type: none;
     gap: var(--gap, 1rem);
+
+    justify-content: center;
    
+}
+
+nav a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: transparent;
+    border: none;
+
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    font-family: var(--fnt-reg);
+    color: var(--clr-text);
+
+    transition: ease-in-out 200ms;
+    
+    
+}
+
+nav img{
+    max-width: 1.5rem;
+    
+   
+}
+
+nav a:not(.navActive):hover
+{
+  
+    animation: jump 1s ease-in-out;
+    transition: ease-in-out 200ms;
+    
+}
+
+
+.navActive::after{
+    content: "";
+    width: 3rem;
+    height: 2rem;
+    background-color: #fff;
+
+    
+
+    border-radius: 20%;
+
+    position: absolute;
+    
+    
+    top: -1rem;
+    animation: ball 100ms ease-in-out;
+}
+
+
+@keyframes jump {
+    0%{
+        transform: scale(1);
+        
+    }
+
+    50%{
+        transform: scale(1.3);
+    }
+
+    100%{
+        transform: scale(1);
+        
+    }
+}
+
+@keyframes ball {
+    0%{
+        top: -2rem;
+        
+        
+    }
+    
+    100%{
+        top: -1rem;
+        
+        
+    }
+
+    
+}
+
+
+
+
+
+/*
+=============
+HOME PAGE CSS, searchbar
+=============
+*/
+
+#search-songs{
+    height: 1.5rem;
 }

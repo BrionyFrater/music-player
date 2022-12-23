@@ -46,7 +46,7 @@
             <!--header song is a randomly selected song-->
             <section id="ctn-header-song">
                 <img id="header-song-img">
-                <audio src="<?=$results[$header_song_id]['source']?>" controls></audio>
+                <!--<audio src="<?=$results[$header_song_id]['source']?>" controls></audio>-->
                 <button>
                     <img><!--play/pause-->greg
                 </button>

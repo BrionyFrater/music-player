@@ -42,15 +42,28 @@
 
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    
+                    <a>
+                        <img src="images/home.svg">
+                        Home
+                    </a>
+                    
                 </li>
 
                 <li>
-                    <a href="#">Liked Songs</a>
+                    <a>
+                        <img src="images/heart.svg">
+                        Liked Songs
+                    </a>
+                    
                 </li>
 
                 <li>
-                    <a href="#">Recently Played</a>
+                    <a>
+                        <img src="images/library.svg">
+                        Library
+                    </a>
+                        
                 </li>
                 
             </ul>
@@ -70,7 +83,43 @@
 
     </div>
 
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        
+        //toggle the apperance of nav button onclick
+        $("nav > ul > li").click(function() {
+            
+           
+            //swtich to filled image on active link
+            let source = $(this).find("img").attr("src");
+               
+            source = source.slice(0, -4) + "-filled.svg";
+            $(this).find("img").attr("src", source);
+
+            
+            //switch to unfilled image on all unactive links
+            source = $(".navActive > img").attr("src");
+            console.log(source);
+
+            if(source != undefined){
+                source = source.slice(0, -11) + ".svg";
+                $(".navActive > img").attr("src", source);
+            }
+            
+            //switch other links from active state
+            $("nav > ul > li > a").removeClass("navActive");
+
+            //put clicked link in active state
+            $(this).find("a").addClass("navActive");
+
+            
+
+            
+
+            
+        
+        });
+    </script>
 
 
 </body>
