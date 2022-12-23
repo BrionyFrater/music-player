@@ -23,40 +23,23 @@
 </head>
 
 <body>
-    <?php
-
-        #connect to database
-        $host = 'localhost';
-        $username = 'levels_user';
-        $password = 'password123';
-        $dbname = 'levels';
-
-        $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-     
-        $count = $conn->query('SELECT COUNT(*) FROM `user_songs`')->fetch();
-        $count = $count['COUNT(*)'];
-  
-        #redirect if there are no songs
-        if ($count == 0) {
-            header('location: noContent.html');
-        }
-    ?>
-
+    
     <div id="wrapper">
 
-        <a href="#current-tab">
-            <button>Skip Navigation</button>
-        </a>
-
+        <!--
+            <a href="#current-tab">
+                <button>Skip Navigation</button>
+            </a>
+        -->
         <header>
-            <img id="levels-logo" src="images/levels-logo.png" alt="the logo for levels music player">
-            <h6>Levels Music Player</h6>
-
-            <label for="search-songs">Search</label>
-            <input type="search" name="search-songs" id="search-songs" placeholder="Songs, Artists, Albums" aria-description="Search for songs, artists and/or albums">
+            <div id="logo-img-and-text">
+                <img id="levels-logo" src="images/levels logo.svg" alt="the logo for levels music player">
+                <h6 id="levels-logo-text">Levels</h6>
+            </div>
         </header>
-
+        
         <nav aria-label="Navigation Bar">
+
             <ul>
                 <li>
                     <a href="#">Home</a>
@@ -75,8 +58,15 @@
         
 
         <section id="current-tab">
-
+            <?php
+                require_once 'home.php';
+            ?>
         </section>
+
+
+        <footer id="audio-controls">
+            <audio src="songs/added/Frank Ocean - Pink + White.mp3" controls></audio>
+        </footer>
 
     </div>
 

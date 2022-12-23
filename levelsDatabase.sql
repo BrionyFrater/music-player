@@ -17,5 +17,5 @@ CREATE TABLE `user_songs` (
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `user_songs` VALUES (1, 'Cinderella', 'Mac Miller', 'The Divine Feminine', 'songs/added/Mac Miller - Cinderella feat Ty Dolla Sign', 'NO', 'songs/added/cover_pics/divine-fem.jpg'),
+INSERT INTO `user_songs` VALUES (1, 'Cinderella', 'Mac Miller', 'The Divine Feminine', 'songs/added/Mac Miller - Cinderella feat Ty Dolla Sign.mp3', 'NO', 'songs/added/cover_pics/divine-fem.jpg'),
 (2, 'Pink + White', 'Frank Ocean', 'Blond', 'songs/added/Frank Ocean - Pink + White.mp3', 'NO', 'songs/added/cover_pics/blond.jpg');

@@ -1,0 +1,64 @@
+<audio controls>
+  <source src="myaudio.mp3" type="audio/mpeg">
+  <p>Your browser does not support the audio element.</p>
+</audio>
+
+
+<!-- Audio element with source file -->
+<audio id="my-audio" src="myaudio.mp3"></audio>
+
+<!-- Seek bar -->
+<input type="range" id="seek-bar" min="0" max="100" value="0" oninput="seekAudio()">
+
+<!-- JavaScript to control audio seek -->
+<script>
+  // Get audio and seek bar elements
+  var audio = document.getElementById("my-audio");
+  var seekBar = document.getElementById("seek-bar");
+
+  // Update seek bar as audio plays
+  audio.addEventListener("timeupdate", function() {
+    var percentage = (audio.currentTime / audio.duration) * 100;
+    seekBar.value = percentage;
+  });
+
+  // Seek audio on seek bar input
+  function seekAudio() {
+    var seekTime = audio.duration * (seekBar.value / 100);
+    audio.currentTime = seekTime;
+  }
+</script>
+
+
+<!-- Custom audio controls -->
+<div id="audio-controls">
+  <button id="play-pause" onclick="playPause()">Play</button>
+  <input type="range" id="volume" min="0" max="1" step="0.1" oninput="setVolume()">
+</div>
+
+<!-- Audio element with source file -->
+<audio id="my-audio" src="myaudio.mp3"></audio>
+
+<!-- JavaScript to control audio playback -->
+<script>
+  // Get audio element and audio controls
+  var audio = document.getElementById("my-audio");
+  var playPauseButton = document.getElementById("play-pause");
+  var volumeControl = document.getElementById("volume");
+
+  // Play/pause audio on button click
+  function playPause() {
+    if (audio.paused) {
+      audio.play();
+      playPauseButton.innerHTML = "Pause";
+    } else {
+      audio.pause();
+      playPauseButton.innerHTML = "Play";
+    }
+  }
+
+  // Set volume on volume control input
+  function setVolume() {
+    audio.volume = volumeControl.value;
+  }
+</script>

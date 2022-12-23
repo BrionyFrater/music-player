@@ -1,25 +1,81 @@
 @font-face {
-    font-family: Champion Gothic;
-    src: url('fonts/ChampionGothic-Heavyweight.ttf');
+    font-family: AkiraExpanded;
+    src: url('fonts/Akira Expanded.otf');
 }
 
-@font-face {
-    font-family: Rhesmanisa;
-    src: url('fonts/Rhesmanisa.otf');
-}
 
 @font-face {
-    font-family: FuturaLight;
-    src: url('fonts/futura-light-bt.ttf');
+    font-family: RoclettePro-Medium;
+    src: url('fonts/RoclettePro-Medium.ttf');
 }
 
 /*page css begins*/
 
-*{
+*,
+*::before, 
+*::after{
     box-sizing: border-box;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    
+}
+
+:root{
+
+    --clr-accent: #F24C27;
+
+    --fnt-big-bold: AkiraExpanded;
+    --fnt-reg: RoclettePro-Medium;
+
+    --gap: 5rem;
+}
+
+body{
+    font-family: var(--fnt-reg);
+    font-size: 20px;
 }
 
 #levels-logo{
-    width: 5vw;
-    height: auto;
+    
+    max-width: 2rem;
+    margin-right: 1rem;
+}
+
+
+#logo-img-and-text{
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+
+#levels-logo-text{
+    font-family: var(--fnt-big-bold);
+    font-size: 2em;
+    
+
+}
+
+
+nav{
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    margin: 0;
+
+    width: 100vw;
+    
+
+    background-color: var(--clr-accent);
+    padding: 3vh;
+    border-radius: 1rem 1rem 0 0;
+    
+
+}
+
+nav ul{
+    display: flex;
+    list-style-type: none;
+    gap: var(--gap, 1rem);
+   
 }
