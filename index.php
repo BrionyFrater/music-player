@@ -43,8 +43,8 @@
             <ul>
                 <li>
                     
-                    <a>
-                        <img src="images/home.svg">
+                    <a href="#">
+                        <img src="images/home.svg" alt="Home">
                         Home
                     </a>
                     
@@ -52,7 +52,7 @@
 
                 <li>
                     <a>
-                        <img src="images/heart.svg">
+                        <img src="images/heart.svg" alt="Liked songs">
                         Liked Songs
                     </a>
                     
@@ -60,7 +60,7 @@
 
                 <li>
                     <a>
-                        <img src="images/library.svg">
+                        <img src="images/library.svg" alt="Library">
                         Library
                     </a>
                         
@@ -78,48 +78,44 @@
 
 
         <footer id="audio-controls">
-            <audio src="songs/added/Frank Ocean - Pink + White.mp3" controls></audio>
+
+            <div class="--flex">
+                <img src="songs/added/cover_pics/blond.jpg" aria-hidden="true" id="player-cover-photo">
+                
+                <div id="song-info-contian">
+                    <h6 id="player-song-name">Pink + White</h6>
+                    <p id="player-artist-name">Frank Ocean</p>
+                </div>
+
+                <!--can put like button here instead-->
+                <button onclick="likeSong()" id="like-button">
+                    <img src="images/heart.svg" alt="press to like this song">
+                </button>
+                 
+            </div>
+
+            
+           
+            <div id="seek-contain">
+                <audio src="songs/added/Frank Ocean - Pink + White.mp3" id="song"></audio>
+                <p id="seek-bar-current-time">0:0</p>
+                <input type="range" id="seek-bar" aria-describedby="Seek Bar" min="0" max="100" value="0" oninput="seekAudio()">
+                <p id="seek-bar-duration"></p>
+            </div>
+            
+            <div id="vol-contain">
+                <input type="range" id="volume" min="0" max="1" step="0.1" oninput="setVolume()">
+            </div>
+            
+
+            <button id="play-pause" onclick="playPause()">Play</button>
         </footer>
 
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script>
-        
-        //toggle the apperance of nav button onclick
-        $("nav > ul > li").click(function() {
-            
-           
-            //swtich to filled image on active link
-            let source = $(this).find("img").attr("src");
-               
-            source = source.slice(0, -4) + "-filled.svg";
-            $(this).find("img").attr("src", source);
-
-            
-            //switch to unfilled image on all unactive links
-            source = $(".navActive > img").attr("src");
-            console.log(source);
-
-            if(source != undefined){
-                source = source.slice(0, -11) + ".svg";
-                $(".navActive > img").attr("src", source);
-            }
-            
-            //switch other links from active state
-            $("nav > ul > li > a").removeClass("navActive");
-
-            //put clicked link in active state
-            $(this).find("a").addClass("navActive");
-
-            
-
-            
-
-            
-        
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="index.js"></script>
 
 
 </body>
