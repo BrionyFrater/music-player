@@ -39,17 +39,20 @@
             $header_song_id = $header_song_id - 1;
             
         ?>
-    
-            <label for="search-songs">Search</label>
-            <input type="search" name="search-songs" id="search-songs" placeholder="Songs, Artists, Albums" aria-description="Search for songs, artists and/or albums">
+            <div>
+                <label for="search-songs">Search</label>
+                <input type="search" name="search-songs" id="hme-search-songs" placeholder="Songs, Artists, Albums" aria-description="Search for songs, artists and/or albums">
+            </div>
             
             <!--header song is a randomly selected song-->
-            <section id="ctn-header-song">
-                <img id="header-song-img">
+            <section id="hme-ctn-header-song">
+                <img id="hme-header-song-img">
                 <!--<audio src="<?=$results[$header_song_id]['source']?>" controls></audio>-->
                 <button>
                     <img><!--play/pause-->greg
                 </button>
+
+                <input type="range">
             </section>
 
         <?php } ?>

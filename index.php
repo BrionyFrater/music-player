@@ -23,8 +23,20 @@
 </head>
 
 <body>
+
+    <!--icons from svg repo-->
     
-    <div id="wrapper">
+    <div id="page-wrapper">
+
+        <div class="animated">
+            <div class="wrapper">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+                <div class="four"></div>
+                <div class="text">Stripe</div>
+            </div>
+        </div>
 
         <!--
             <a href="#current-tab">
@@ -79,7 +91,7 @@
 
         <footer id="audio-controls">
 
-            <div class="--flex">
+            <div class="--flex-space-between">
                 <img src="songs/added/cover_pics/blond.jpg" aria-hidden="true" id="player-cover-photo">
                 
                 <div id="song-info-contian">
@@ -87,7 +99,6 @@
                     <p id="player-artist-name">Frank Ocean</p>
                 </div>
 
-                <!--can put like button here instead-->
                 <button onclick="likeSong()" id="like-button">
                     <img src="images/heart.svg" alt="press to like this song">
                 </button>
@@ -97,18 +108,28 @@
             
            
             <div id="seek-contain">
-                <audio src="songs/added/Frank Ocean - Pink + White.mp3" id="song"></audio>
+                <audio id="song" preload="metadata" paused></audio>
+                
                 <p id="seek-bar-current-time">0:0</p>
                 <input type="range" id="seek-bar" aria-describedby="Seek Bar" min="0" max="100" value="0" oninput="seekAudio()">
                 <p id="seek-bar-duration"></p>
             </div>
             
             <div id="vol-contain">
+                <img src="images/volume.svg">
                 <input type="range" id="volume" min="0" max="1" step="0.1" oninput="setVolume()">
             </div>
             
+            <div class="--flex-center">
+                <button id="loop" onclick="loop()" aria-describedby="loop button">
+                    <img src="images/loop.svg">
+                </button>
 
-            <button id="play-pause" onclick="playPause()">Play</button>
+                <button id="play-pause" onclick="playPause()" aria-describedby="play/pause button">
+                    <img src="images/play.svg">
+                </button>
+            </div>
+            
         </footer>
 
     </div>

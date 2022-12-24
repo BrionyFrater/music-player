@@ -20,6 +20,11 @@ BASE PAGE CSS, nav, logos, and audio bar
 ========================================
 */
 
+/*
+    GENERAL
+________________
+*/
+
 *,
 *::before, 
 *::after{
@@ -53,6 +58,117 @@ body{
     font-size: 20px;
 }
 
+#wrapper{
+    width: 100%;
+    height: 100vh;
+    background-color: aqua;
+}
+
+button{
+    --webkit-appearance: none;
+    background: transparent;
+    border: none;
+}
+
+/*
+    GRADIENT based on "Stack Findover" https://www.youtube.com/watch?v=LbAX-Rw7Tus&t=62s&ab_channel=StackFindover
+________________
+*/
+
+.animated {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .wrapper {
+    width: 400px;
+    height: 400px;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+    z-index: -3;
+  }
+  .wrapper div {
+    position: absolute;
+    filter: blur(500px);
+    opacity: 0.8;
+    -webkit-filter: blur(50px);
+    
+  }
+  .animated .one {
+    border-radius: 100%;
+    width: 600px;
+    height: 600px;
+    background-color: var(--clr-text) ;
+    left: -50px;
+    top: -300px;
+    z-index: -2;
+    
+  }
+  .animated .two {
+    width: 500px;
+    height: 800px;
+    background-color:  #ff333d;
+    bottom: -30px;
+    left: -80px;
+    z-index: -3;
+  }
+  .animated .three {
+    border-radius: 100%;
+    width: 450px;
+    height: 450px;
+    bottom: -80px;
+    right: -100px;
+    z-index: -3;
+    background-color: #ffcb57;
+    animation: flyPlus 10s linear infinite;
+    -webkit-animation: flyPlus 10s linear infinite;
+    transform: rotate(0) translate(200px) rotate(0);
+    -webkit-transform: rotate(0) translate(200px) rotate(0);
+    -moz-transform: rotate(0) translate(200px) rotate(0);
+    -ms-transform: rotate(0) translate(200px) rotate(0);
+    -o-transform: rotate(0) translate(200px) rotate(0);
+  }
+
+  .four {
+    border-radius: 100%;
+    width: 350px;
+    height: 350px;
+    margin: auto;
+    bottom: 0;
+    right: 0;
+    background-color: #A0A2F5;
+    animation: flyPlus 15s linear infinite;
+    -webkit-animation: flyPlus 15s linear infinite;
+    transform: rotate(0) translate(200px) rotate(0);
+    -webkit-transform: rotate(0) translate(200px) rotate(0);
+    -moz-transform: rotate(0) translate(200px) rotate(0);
+    -ms-transform: rotate(0) translate(200px) rotate(0);
+    -o-transform: rotate(0) translate(200px) rotate(0);
+  }
+  
+
+  @keyframes fly {
+    100% {
+      transform: rotate(2turn) translate(200px) rotate(-2turn);
+      -webkit-transform: rotate(2turn) translate(200px) rotate(-2turn);
+      -moz-transform: rotate(2turn) translate(200px) rotate(-2turn);
+      -ms-transform: rotate(2turn) translate(200px) rotate(-2turn);
+      -o-transform: rotate(2turn) translate(200px) rotate(-2turn);
+  }
+  }
+
+  @keyframes flyPlus {
+    100% {
+      transform: rotate(-2turn) translate(200px) rotate(2turn);
+      -webkit-transform: rotate(-2turn) translate(200px) rotate(2turn);
+      -moz-transform: rotate(-2turn) translate(200px) rotate(2turn);
+      -ms-transform: rotate(-2turn) translate(200px) rotate(2turn);
+      -o-transform: rotate(-2turn) translate(200px) rotate(2turn);
+  }
+  }
+
 /*
     NAV
 ________________
@@ -77,8 +193,6 @@ ________________
     
 
 }
-
-
 
 nav{
     position: fixed;
@@ -212,7 +326,7 @@ ________________
     gap: 5%;
 
     background-color: var(--clr-dark);
-    padding: 2vh 2vh 20vh 2vh;
+    padding: 2vh 2vh 11vh 2vh;
     border-radius: 1rem 1rem 0 0;
 
     color: var(--clr-text);
@@ -268,7 +382,7 @@ ________________
     border-radius: 1rem;
     
 
-    grid-area: pic;
+    
     
 }
 
@@ -284,39 +398,116 @@ ________________
 }
 
 #play-pause{
+    -webkit-appearance: none;
+    width: 3rem;
+    border: none;
     align-self: center;
     
 }
 
-#volume{
-    align-self: center;
+#play-pause::after{
+    content: " ";
+    width: 2.4rem;
+    height: 2.9rem;
+    background: var(--clr-accent);
+    border-radius: 1rem;
+
+
+    position: absolute;
+    left: 52%;
+    top: 52%;
+    z-index: -1;
+}
+
+#vol-contain{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+
+    padding-bottom: 2rem;
+}
+
+#vol-contain img{
+    width: 1rem;
+}
+
+
+@media (max-width: 40rem){
+    #vol-contain{
+        display: none;
+        
+    }
+
+    
+
     
 }
 
-.--flex{
+.--flex-space-between{
 
     display: flex;
     gap: 0.7em;
     justify-content: space-between;
 }
 
-#like-button{
+.--flex-center{
+    display: flex;
+    gap: 0.7em;
+    justify-content: center;
+
+    
+}
+
+#like-button, #loop{
     width: 1.5rem;
-    background: transparent;
-    border: none;
 }
 
 
 
+
+
 /*
-=============
+==========================
 HOME PAGE CSS, searchbar
-=============
+==========================
 */
 
-#search-songs{
+#hme-search-songs{
     height: 1.5rem;
+    width: 15rem;
     border: none;
-    border: 1px solid var(--clr-dark);
+    background-color: rgb(224, 220, 220);
     border-radius: 2rem;
+
+    background-image:url('images/search.svg');
+    background-repeat:no-repeat;
+    background-position:right top;
+    
+    padding-right:2rem;
+
+    
+    font-family: var(--fnt-reg);
+    letter-spacing: 0.1rem;
+}
+
+#hme-search-songs::placeholder{
+    color: var(--clr-dark);
+    font-family: var(--fnt-reg);
+    letter-spacing: 0.1rem;
+}
+
+
+#hme-search-songs::-webkit-search-cancel-button{
+    -webkit-appearance: none;
+    
+    height: 1rem;
+    width: 1rem;
+    border-radius:1rem;
+
+    background:url('images/cancel.svg');
+    background-size: contain;
+  
+    
+
 }
