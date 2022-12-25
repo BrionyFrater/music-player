@@ -34,7 +34,7 @@
                 <div class="two"></div>
                 <div class="three"></div>
                 <div class="four"></div>
-                <div class="text">Stripe</div>
+                
             </div>
         </div>
 

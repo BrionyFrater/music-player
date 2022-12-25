@@ -56,13 +56,11 @@ ________________
 body{
     font-family: var(--fnt-reg);
     font-size: 20px;
+
+    
 }
 
-#wrapper{
-    width: 100%;
-    height: 100vh;
-    background-color: aqua;
-}
+
 
 button{
     --webkit-appearance: none;
@@ -82,8 +80,8 @@ ________________
     height: 100vh;
   }
   .wrapper {
-    width: 400px;
-    height: 400px;
+    width: 100vw;
+    height: 100vh;
     background: #fff;
     position: relative;
     overflow: hidden;
@@ -91,83 +89,88 @@ ________________
   }
   .wrapper div {
     position: absolute;
-    filter: blur(500px);
+    filter: blur(120px);
     opacity: 0.8;
-    -webkit-filter: blur(50px);
+    -webkit-filter: blur(120px);
+    
     
   }
   .animated .one {
     border-radius: 100%;
-    width: 600px;
-    height: 600px;
-    background-color: var(--clr-text) ;
-    left: -50px;
-    top: -300px;
+    width: 90rem;
+    height: 90rem;
+    background-color: var(--clr-text);
+    left: 10%;
+    top: 5%;
     z-index: -2;
-    
+    animation: fly3 15s linear infinite alternate-reverse;
   }
-  .animated .two {
-    width: 500px;
-    height: 800px;
+  /*.animated .two {
+    border-radius: 100%;
+    width: 6rem;
+    height: 6rem;
     background-color:  #ff333d;
-    bottom: -30px;
-    left: -80px;
+    bottom: -2%;
+    left: -4%;
     z-index: -3;
-  }
+  }*/
   .animated .three {
     border-radius: 100%;
-    width: 450px;
-    height: 450px;
-    bottom: -80px;
-    right: -100px;
+    width: 60rem;
+    height: 60rem;
+    bottom: 30%;
+    right: 30%;
     z-index: -3;
-    background-color: #ffcb57;
-    animation: flyPlus 10s linear infinite;
-    -webkit-animation: flyPlus 10s linear infinite;
-    transform: rotate(0) translate(200px) rotate(0);
-    -webkit-transform: rotate(0) translate(200px) rotate(0);
-    -moz-transform: rotate(0) translate(200px) rotate(0);
-    -ms-transform: rotate(0) translate(200px) rotate(0);
-    -o-transform: rotate(0) translate(200px) rotate(0);
+    background-color: #f793a8;
+    animation: fly2 10s linear infinite alternate-reverse;
+   
   }
 
   .four {
     border-radius: 100%;
-    width: 350px;
-    height: 350px;
-    margin: auto;
-    bottom: 0;
-    right: 0;
+    width: 90rem;
+    height: 90rem;
+    bottom: 0%;
+    right: 5%;
     background-color: #A0A2F5;
-    animation: flyPlus 15s linear infinite;
-    -webkit-animation: flyPlus 15s linear infinite;
-    transform: rotate(0) translate(200px) rotate(0);
-    -webkit-transform: rotate(0) translate(200px) rotate(0);
-    -moz-transform: rotate(0) translate(200px) rotate(0);
-    -ms-transform: rotate(0) translate(200px) rotate(0);
-    -o-transform: rotate(0) translate(200px) rotate(0);
+    animation: fly1 20s linear infinite alternate-reverse;
+    z-index: -4;
+    
   }
   
-
-  @keyframes fly {
+  @keyframes fly2{
     100% {
-      transform: rotate(2turn) translate(200px) rotate(-2turn);
-      -webkit-transform: rotate(2turn) translate(200px) rotate(-2turn);
-      -moz-transform: rotate(2turn) translate(200px) rotate(-2turn);
-      -ms-transform: rotate(2turn) translate(200px) rotate(-2turn);
-      -o-transform: rotate(2turn) translate(200px) rotate(-2turn);
-  }
+
+        transform: rotate(-2turn) translate(200px) rotate(2turn);
+        -webkit-transform: rotate(-2turn) translate(200px) rotate(2turn);
+        -moz-transform: rotate(-2turn) translate(200px) rotate(2turn);
+        -ms-transform: rotate(-2turn) translate(200px) rotate(2turn);
+        -o-transform: rotate(-2turn) translate(200px) rotate(2turn);
+    }
   }
 
-  @keyframes flyPlus {
+  @keyframes fly3 {
     100% {
-      transform: rotate(-2turn) translate(200px) rotate(2turn);
-      -webkit-transform: rotate(-2turn) translate(200px) rotate(2turn);
-      -moz-transform: rotate(-2turn) translate(200px) rotate(2turn);
-      -ms-transform: rotate(-2turn) translate(200px) rotate(2turn);
-      -o-transform: rotate(-2turn) translate(200px) rotate(2turn);
+       
+        transform: rotate(-2turn)  translate(300px) rotate(2turn);
+        -webkit-transform: rotate(-2turn) translate(300px) rotate(2turn);
+        -moz-transform: rotate(-2turn) translate(300px) rotate(2turn);
+        -ms-transform: rotate(-2turn) translate(300px) rotate(2turn);
+        -o-transform: rotate(-2turn) translate(300px) rotate(2turn);
+    }
   }
+
+  @keyframes fly1 {
+    100% {
+        
+        transform: rotate(-2turn) translate(100px) rotate(2turn);
+        -webkit-transform: rotate(-2turn) translate(100px) rotate(2turn);
+        -moz-transform: rotate(-2turn) translate(100px) rotate(2turn);
+        -ms-transform: rotate(-2turn) translate(100px) rotate(2turn);
+        -o-transform: rotate(-2turn) translate(100px) rotate(2turn);
+    }
   }
+
 
 /*
     NAV
@@ -210,7 +213,6 @@ nav{
     padding: 1vh;
     border-radius: 1rem 1rem 0 0;
     
-
 }
 
 nav ul{
@@ -331,7 +333,6 @@ ________________
 
     color: var(--clr-text);
 
-  
 }
 
 #seek-contain{
@@ -414,8 +415,8 @@ ________________
 
 
     position: absolute;
-    left: 52%;
-    top: 52%;
+    left: 51%;
+    top: 53%;
     z-index: -1;
 }
 
@@ -439,6 +440,10 @@ ________________
         
     }
 
+    #play-pause::after{
+        left: 52%;
+        top: 47%;
+    }
     
 
     
