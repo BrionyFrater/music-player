@@ -85,7 +85,7 @@
             </ul>
         </nav>
         
-
+        
         <section id="current-tab">
             <?php
                 require_once 'home.php';
@@ -96,7 +96,7 @@
         <footer id="audio-controls">
 
             <div class="--flex-space-between">
-                <img src="songs/added/cover_pics/SZA-S.O.S.jpeg" aria-hidden="true" id="player-cover-photo">
+                <img src="songs/added/cover_pics/frank-ocean-blond.jpg" aria-hidden="true" id="player-cover-photo">
                 
                 <div id="song-info-contian">
                     <h6 id="player-song-name">Ghost in the machine (feat. Phoebe Bridges)</h6>

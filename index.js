@@ -46,7 +46,7 @@ let playPauseButton = document.getElementById("play-pause");
 let volumeControl = document.getElementById("volume");
 let seekBar = document.getElementById("seek-bar");
 
-audio.src = "songs/added/SZA - Ghost in the Machine ft Phoebe Bridgers.mp3";
+audio.src = "songs/added/Frank Ocean - White Ferrari.mp3";
 
 audio.onloadedmetadata = function() {
   document.getElementById("seek-bar-duration").innerHTML = formatTime(audio.duration);
@@ -166,11 +166,26 @@ function loop(){
 //album carousel
 
 $("#hme-album-carousel").owlCarousel({
-  margin: 2,
-
+  autoPlay: true,
+  loop:true,
+  margin: 1,
+  stagePadding: 1,
   //being responsive
-  itemsDesktopSmall : [980,4],
-  itemsTablet: [768,3],
-  itemsMobile : [479,3]
+  itemsDesktopSmall : [980,9],
+  itemsTablet: [920,4],
+  itemsMobile : [499,3]
+
+});
+
+//artist carousel
+$("#hme-all-artists-carousel").owlCarousel({
+  autoPlay: true,
+  loop:true,
+  margin: 1,
+  stagePadding: 1,
+  //being responsive
+  itemsDesktopSmall : [980,9],
+  itemsTablet: [920,4],
+  itemsMobile : [499,3]
 
 });

@@ -62,11 +62,24 @@ body{
 }
 
 
-
 button{
     --webkit-appearance: none;
     background: transparent;
     border: none;
+}
+
+header{
+    padding: 3rem 3rem 0 3rem;
+}
+
+h2{
+    padding: 2rem 0 0 0;
+}
+
+@media(max-width: 500px){
+    header{
+        padding: 1rem 1rem 0 1rem;
+    }
 }
 
 /* width */
@@ -88,9 +101,9 @@ button{
     border-radius: 1rem;
   }
 
-  :focus{
-    outline: 2px solid #F24C27;
-  }
+  
+  
+  
 
 /*
     GRADIENT based on "Stack Findover" https://www.youtube.com/watch?v=LbAX-Rw7Tus&t=62s&ab_channel=StackFindover
@@ -333,6 +346,20 @@ nav a:not(.navActive):hover
     
 }
 
+#current-tab{
+    padding: 3rem 3rem 40rem 3rem;
+}
+
+@media(max-width: 500px){
+    header{
+        padding: 1rem 1rem 0 1rem;
+    }
+
+    #current-tab{
+        padding: 1rem 1rem 25rem 1rem;
+    }
+}
+
 /*
     AUDIO BAR
 ________________
@@ -397,9 +424,6 @@ ________________
     
 }
 
-#seek-bar:focus, #volume:focus{
-    outline: 2px solid #fff;
-}
 
 
 
@@ -423,6 +447,17 @@ ________________
     font-size: 1.5rem;
     
 }
+
+@media only screen and (hover: none){
+
+    #player-song-name{
+        
+        font-size: 0.8rem;
+        
+    }
+    
+}
+
 
 #player-artist-name{
     font-family: var(--fnt-light);
@@ -499,7 +534,13 @@ ________________
     width: 1.5rem;
 }
 
+@media only screen and (hover: none){
 
+    #like-button{
+        width: 3.5rem;
+    }
+    
+}
 
 
 
@@ -508,6 +549,22 @@ ________________
 HOME PAGE CSS, searchbar
 ==========================
 */
+
+#hme-all-song-contain{
+    padding: 2rem 0rem;
+
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.2px);
+    -webkit-backdrop-filter: blur(6.2px);
+    border: 1px solid rgba(255, 255, 255, 0.41);
+
+    border-radius: 1rem;
+    height: 40rem;
+    overflow-y: scroll;
+}
 
 #hme-nth-here, #hme-nth{
     text-transform: uppercase;
@@ -576,6 +633,8 @@ HOME PAGE CSS, searchbar
 
 .albumLink{
     color: var(--clr-accent);
+    border-radius: 1rem;
+    
 }
 
 .albumImage{
@@ -586,11 +645,12 @@ HOME PAGE CSS, searchbar
 
 @media(max-width: 509px){
     .albumImage{
-        width: 5.5rem;
+        width: 7.5rem;
     }
 }
 
-.albumName{
+
+.albumName, .artistArtist{
     font-size: 1.1rem;
     font-family: var(--fnt-big-bold);
 }
@@ -599,6 +659,32 @@ HOME PAGE CSS, searchbar
     font-size: 1rem;
     color: var(--clr-dark);
     letter-spacing: 0.1rem;
+}
+
+.albumPlay{
+    width: 1rem;
+    position: relative;
+    left: -3rem;
+    top: -2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+}
+
+.albumLink:hover > .albumPlay{
+    animation: albumPlayShow 1s infinite ease-in-out alternate-reverse;
+}
+
+@keyframes albumPlayShow{
+    from{
+        opacity: 0.6;
+        top: -2rem;
+    }
+    to{
+        opacity: 1;
+        top: -4rem;
+    }
 }
 
 .songLink{
@@ -646,4 +732,31 @@ HOME PAGE CSS, searchbar
 .songArtist{
     font-family: var(--fnt-light);
 }
+
+@media(max-width: 509px){
+    .songLink{
+        gap: 5vw;
+    }
+    
+}
+
+.artistLink{
+    color: var(--clr-accent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.artistImage{
+    width: 10rem;
+    border-radius: 10rem;
+    
+}
+
+@media(max-width: 509px){
+    .albumImage{
+        width: 7.5rem;
+    }
+}
+
 
