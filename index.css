@@ -56,6 +56,7 @@ ________________
 body{
     font-family: var(--fnt-reg);
     font-size: 20px;
+    color: var(--clr-dark);
 
     
 }
@@ -68,6 +69,29 @@ button{
     border: none;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 0.6rem;
+    
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+    
+    border-radius: 1rem;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--clr-accent);
+    border-radius: 1rem;
+  }
+
+  :focus{
+    outline: 2px solid #F24C27;
+  }
+
 /*
     GRADIENT based on "Stack Findover" https://www.youtube.com/watch?v=LbAX-Rw7Tus&t=62s&ab_channel=StackFindover
 ________________
@@ -78,21 +102,23 @@ ________________
     align-items: center;
     justify-content: center;
     height: 100vh;
+    position: fixed;
+    z-index: -3
   }
   .wrapper {
     width: 100vw;
     height: 100vh;
     background: #fff;
-    position: relative;
+    position: fixed;
     overflow: hidden;
     z-index: -3;
   }
   .wrapper div {
-    position: absolute;
+    position: fixed;
     filter: blur(120px);
     opacity: 0.8;
     -webkit-filter: blur(120px);
-    
+    z-index: -3
     
   }
   .animated .one {
@@ -105,15 +131,9 @@ ________________
     z-index: -2;
     animation: fly3 15s linear infinite alternate-reverse;
   }
-  /*.animated .two {
-    border-radius: 100%;
-    width: 6rem;
-    height: 6rem;
-    background-color:  #ff333d;
-    bottom: -2%;
-    left: -4%;
-    z-index: -3;
-  }*/
+
+  
+
   .animated .three {
     border-radius: 100%;
     width: 60rem;
@@ -171,6 +191,13 @@ ________________
     }
   }
 
+  @media only screen and (hover: none){
+
+    .animated{
+        display: none;
+    }
+    
+    }
 
 /*
     NAV
@@ -370,6 +397,10 @@ ________________
     
 }
 
+#seek-bar:focus, #volume:focus{
+    outline: 2px solid #fff;
+}
+
 
 
 #song-info-contian, #vol-contain{
@@ -389,7 +420,7 @@ ________________
 
 #player-song-name{
     font-family: var(--fnt-big-bold);
-    
+    font-size: 1.5rem;
     
 }
 
@@ -478,26 +509,52 @@ HOME PAGE CSS, searchbar
 ==========================
 */
 
+#hme-nth-here, #hme-nth{
+    text-transform: uppercase;
+    font-family: var(--fnt-big-bold);
+    font-size: 8rem;
+    word-wrap: break-word;
+    
+}
+
+@media(max-width: 1367px){
+    #hme-nth-here, #hme-nth{
+        font-size: 5rem;
+    }
+}
+
+@media(max-width: 516px){
+    #hme-nth-here, #hme-nth{
+        font-size: 3rem;
+    }
+}
+
+
+#hme-nth{
+    color: var(--clr-accent);
+}
+
 #hme-search-songs{
     height: 1.5rem;
     width: 15rem;
     border: none;
-    background-color: rgb(224, 220, 220);
+    background-color: var(--clr-dark);
     border-radius: 2rem;
 
     background-image:url('images/search.svg');
     background-repeat:no-repeat;
     background-position:right top;
     
-    padding-right:2rem;
+    padding: 0 2rem;
 
     
     font-family: var(--fnt-reg);
+    color: var(--clr-text);
     letter-spacing: 0.1rem;
 }
 
 #hme-search-songs::placeholder{
-    color: var(--clr-dark);
+    color: var(--clr-text);
     font-family: var(--fnt-reg);
     letter-spacing: 0.1rem;
 }
@@ -516,3 +573,77 @@ HOME PAGE CSS, searchbar
     
 
 }
+
+.albumLink{
+    color: var(--clr-accent);
+}
+
+.albumImage{
+    width: 10rem;
+    border-radius: 1rem;
+    
+}
+
+@media(max-width: 509px){
+    .albumImage{
+        width: 5.5rem;
+    }
+}
+
+.albumName{
+    font-size: 1.1rem;
+    font-family: var(--fnt-big-bold);
+}
+
+.albumArtist{
+    font-size: 1rem;
+    color: var(--clr-dark);
+    letter-spacing: 0.1rem;
+}
+
+.songLink{
+    display: flex;
+    align-items: center;
+    
+
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.2px);
+    -webkit-backdrop-filter: blur(6.2px);
+    border: 1px solid rgba(255, 255, 255, 0.41);
+
+    margin: 2rem;
+    padding: 0.5rem;
+    gap: var(--gap);
+    color: #999999;
+    letter-spacing: 0.1rem;
+
+    overflow-x: scroll;
+
+    transition: 0.3s ease-in-out;
+}
+
+.songLink:hover{
+    transition: 0.2s ease-in-out;
+    background: rgba(255, 255, 255, 0.70);
+    font-size: 2rem;
+}
+
+.songImage{
+    width: 3rem;
+    border-radius: 0.5rem;
+    
+}
+
+.songName{
+    
+    font-family: var(--fnt-light);
+    color: var(--clr-accent);
+}
+
+.songArtist{
+    font-family: var(--fnt-light);
+}
+

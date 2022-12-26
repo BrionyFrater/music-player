@@ -1,3 +1,5 @@
+
+
 /*
                 NAV BAR
 ============================================
@@ -44,7 +46,7 @@ let playPauseButton = document.getElementById("play-pause");
 let volumeControl = document.getElementById("volume");
 let seekBar = document.getElementById("seek-bar");
 
-audio.src = "songs/added/Frank Ocean - Pink + White.mp3";
+audio.src = "songs/added/SZA - Ghost in the Machine ft Phoebe Bridgers.mp3";
 
 audio.onloadedmetadata = function() {
   document.getElementById("seek-bar-duration").innerHTML = formatTime(audio.duration);
@@ -149,3 +151,26 @@ function loop(){
   }
   
 }
+
+/*
+============================================
+                H O M E   P A G E
+============================================
+*/
+
+/*
+                ALBUMS AND ARTISTS
+============================================
+*/
+
+//album carousel
+
+$("#hme-album-carousel").owlCarousel({
+  margin: 2,
+
+  //being responsive
+  itemsDesktopSmall : [980,4],
+  itemsTablet: [768,3],
+  itemsMobile : [479,3]
+
+});

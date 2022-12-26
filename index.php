@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Levels - Music Player</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css" integrity="sha512-X/RSQYxFb/tvuz6aNRTfKXDnQzmnzoawgEQ4X8nZNftzs8KFFH23p/BA6D2k0QCM4R0sY1DEy9MIY9b3fwi+bg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css" integrity="sha512-f28cvdA4Bq3dC9X9wNmSx21rjWI+5piIW/uoc2LuQ67asKxfQjUow2MkcCNcfJiaLrHcGbed1wzYe3dlY4w9gA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link href="index.css" rel="stylesheet">
+    
 
     <!--dark mode favicon-->
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png" media="(prefers-color-scheme: dark)">
@@ -92,11 +96,11 @@
         <footer id="audio-controls">
 
             <div class="--flex-space-between">
-                <img src="songs/added/cover_pics/blond.jpg" aria-hidden="true" id="player-cover-photo">
+                <img src="songs/added/cover_pics/SZA-S.O.S.jpeg" aria-hidden="true" id="player-cover-photo">
                 
                 <div id="song-info-contian">
-                    <h6 id="player-song-name">Pink + White</h6>
-                    <p id="player-artist-name">Frank Ocean</p>
+                    <h6 id="player-song-name">Ghost in the machine (feat. Phoebe Bridges)</h6>
+                    <p id="player-artist-name">SZA</p>
                 </div>
 
                 <button onclick="likeSong()" id="like-button">
@@ -136,6 +140,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js" integrity="sha512-9CWGXFSJ+/X0LWzSRCZFsOPhSfm6jbnL+Mpqo0o8Ke2SYr8rCTqb4/wGm+9n13HtDE1NQpAEOrMecDZw4FXQGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="index.js"></script>
 
 
