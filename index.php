@@ -92,15 +92,15 @@
             ?>
         </section>
 
-
+        
         <footer id="audio-controls">
 
             <div class="--flex-space-between">
                 <img src="songs/added/cover_pics/frank-ocean-blond.jpg" aria-hidden="true" id="player-cover-photo">
                 
                 <div id="song-info-contian">
-                    <h6 id="player-song-name">Ghost in the machine (feat. Phoebe Bridges)</h6>
-                    <p id="player-artist-name">SZA</p>
+                    <h6 id="player-song-name">White Ferrari</h6>
+                    <p id="player-artist-name">Frank Ocean</p>
                 </div>
 
                 <button onclick="likeSong()" id="like-button">

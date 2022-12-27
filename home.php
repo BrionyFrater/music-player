@@ -57,7 +57,7 @@
         <h2>Albums</h2>
         <section id="hme-album-carousel" aria-labelledby="All albums">
             <?php foreach($albums as $album): ?>
-                <a href="<?=$album['source']?>" class="albumLink" aria-labelledby="<?=$album['album']?> by <?=$album['artist']?>, click to play">
+                <a href="<?=$album['album']?>" class="albumLink" aria-labelledby="<?=$album['album']?> by <?=$album['artist']?>, click to play">
                     <img src="<?=$album['cover_pic']?>" class="albumImage">
                     <img src="images/play.svg" class="albumPlay">
                     <h5 class="albumName"><?=$album['album']?></h5>
@@ -67,7 +67,7 @@
         </section>
         
         <!-- All Songs -->
-        <h2>All Songs</h2>
+        <h2>Songs</h2>
         <section id="hme-all-song" aria-labelledby="All songs">
             <div id="hme-all-song-contain">
                 <?php foreach($all as $song): ?>
@@ -75,6 +75,7 @@
                         <img src="<?=$song['cover_pic']?>" class="songImage">
                         <h5 class="songName"><?=$song['name']?></h5>
                         <p class="songArtist"><?=$song['artist']?></p>
+                        <p hidden id="song-liked"><?=$song['liked']?></p>
                     </a>
                 <?php endforeach; ?>  
             </div>
@@ -82,7 +83,7 @@
         </section>
         
         <!-- Artists -->
-        <h2>Artist</h2>
+        <h2>Artists</h2>
         <section id="hme-all-artists-carousel">
             <?php foreach($artists as $artist): ?>
                 <a href="<?=$artist['artist']?>" class="artistLink" aria-labelledby="<?=$artist['artist']?> songs">

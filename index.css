@@ -347,16 +347,16 @@ nav a:not(.navActive):hover
 }
 
 #current-tab{
-    padding: 3rem 3rem 40rem 3rem;
+    padding: 3rem 3rem 30rem 3rem;
 }
 
-@media(max-width: 500px){
+@media(max-width: 600px){
     header{
         padding: 1rem 1rem 0 1rem;
     }
 
     #current-tab{
-        padding: 1rem 1rem 25rem 1rem;
+        padding: 1rem 1rem 22rem 1rem;
     }
 }
 
@@ -537,7 +537,7 @@ ________________
 @media only screen and (hover: none){
 
     #like-button{
-        width: 3.5rem;
+        width: 2rem;
     }
     
 }
