@@ -47,6 +47,7 @@ let seekBar = document.getElementById("seek-bar");
 //sets the first song to white ferrari by frank ocean
 audio.src = "songs/added/Frank Ocean - White Ferrari.mp3";
 
+audioListner = false;
 
 audio.onloadedmetadata = function() {
   document.getElementById("seek-bar-duration").innerHTML = formatTime(audio.duration);
@@ -162,34 +163,7 @@ function loop(){
   
 }
 
-//plays a song when clicked
-$(".songLink").click(function(event) {
 
-  event.preventDefault();
-
-  
-  //replaces the song name, artist and image with the one that was clicked on
-  audio.src = $(this).attr("href");
-  $("#player-song-name").text($(this).find(".songName").text());
-  $("#player-artist-name").text($(this).find(".songArtist").text());
-  $("#player-cover-photo").attr("src", $(this).find(".songImage").attr("src"));
-
-
-  
-  //checks if the song is apart of liked songs so the user interface can be appropriately updated
-  if($(this).find("#song-liked").text() === "YES"){
-    $("#like-button img").attr("src", "images/heart-filled.svg");
-    $("#like-button").addClass("liked");
-
-  }else{
-    $("#like-button img").attr("src", "images/heart.svg");
-    $("#like-button").removeClass("liked");
-  }
-
-  //simulates clicking the play button, used for usability
-  $("#play-pause").click();
-  
-});
 
 /*
 ============================================
@@ -228,9 +202,8 @@ $("#hme-all-artists-carousel").owlCarousel({
 
 });
 
-/*
-NOT WORKING 
-*/
+
+
 //play songs from an album when clicked
 $(".albumLink").click(function(event) {
 
@@ -244,50 +217,48 @@ $(".albumLink").click(function(event) {
       let i = 0;
 
       if(data.lenght != 0){
-        audio.src = (data[i]['source']);
-
-        //replaces the player song name, artist and image with the one that was clicked on
-        $("#player-song-name").text(data[i]['name']);
-        $("#player-artist-name").text(data[i]['artist']);
-        $("#player-cover-photo").attr("src", data[i]['cover_pic']);
         
-        
-        //checks if the song is apart of liked songs so the user interface can be appropriately updated
-        if(data[i]['liked'] === "YES"){
-          $("#like-button img").attr("src", "images/heart-filled.svg");
-          $("#like-button").addClass("liked");
-
-        }else{
-          $("#like-button img").attr("src", "images/heart.svg");
-          $("#like-button").removeClass("liked");
-        }
-
-
-        //simulates clicking the play button, used for usability
-        $("#play-pause").click();
-
-      //   audio.addEventListener('ended', function() {
-
-      //     i = i + 1;
-  
-      //     if(i < data.length){
-      //       audio.src = (data[i]['source']);
-      //     }
-      //     // enable button/link
-      //  });
-       
-      //   for (; i < data.length; i++) {
+        //updates player labels and sources for each song in the queue
+        function updatePlayerInfo(){
           
-      //   }
+          audio.src = data[i]['source'];
+
+          //replaces the player song name, artist and image with the one that was clicked on
+          $("#player-song-name").text(data[i]['name']);
+          $("#player-artist-name").text(data[i]['artist']);
+          $("#player-cover-photo").attr("src", data[i]['cover_pic']);
+          
+          
+          //checks if the song is apart of liked songs so the user interface can be appropriately updated
+          if(data[i]['liked'] === "YES"){
+            $("#like-button img").attr("src", "images/heart-filled.svg");
+            $("#like-button").addClass("liked");
+
+          }else{
+            $("#like-button img").attr("src", "images/heart.svg");
+            $("#like-button").removeClass("liked");
+          }
+
+          
+          //simulates clicking the play button, used for usability
+          $("#play-pause").click();
+        }
         
-        // //replaces the song name, artist and image with the one that was clicked on
-        // audio.src = $(this).attr("href");
-        // $("#player-song-name").text($(this).find(".songName").text());
-        // $("#player-artist-name").text($(this).find(".songArtist").text());
-        // $("#player-cover-photo").attr("src", $(this).find(".songImage").attr("src"));
+        updatePlayerInfo();
+
+        audio.addEventListener('ended', function albumHandler() {
+          audioListner = true;
+          i = i + 1;
   
-        // //simulates clicking the play button, used for usability
-        // $("#play-pause").click();
+          if(i < data.length){
+            updatePlayerInfo();
+          }else{
+            audio.removeEventListener('ended', albumHandler);
+          }
+          
+       });
+       
+        
       }
       
 
@@ -295,6 +266,58 @@ $(".albumLink").click(function(event) {
       alert('An error has occured');
     }
     
+  });
+
+});
+
+
+/*
+                SONGS
+============================================
+*/
+
+
+//plays a song when clicked
+$(".songLink").click(function(event) {
+
+  event.preventDefault();
+  
+  //  Removes the ended event listner from the audio bar to stop the player from continuing to play the album. 
+  if(audioListner === true){
+    $("#song").off();
+  }
+  
+
+  //replaces the song name, artist and image with the one that was clicked on
+  audio.src = $(this).attr("href");
+  $("#player-song-name").text($(this).find(".songName").text());
+  $("#player-artist-name").text($(this).find(".songArtist").text());
+  $("#player-cover-photo").attr("src", $(this).find(".songImage").attr("src"));
+
+  //simulates clicking the play button, used for usability
+  $("#play-pause").click();
+  
+  //checks if the song is apart of liked songs so the user interface can be appropriately updated
+  $.get('getAlbum.php', {artist: $(this).find(".songName").text(), song: $(this).find(".songArtist").text()}, function(data, textStatus, jqXHR){
+    
+    if(textStatus === 'success' && data.lenght > 0){
+
+      data = JSON.parse(data);
+
+      if(data[0]['liked'] === "YES"){
+        $("#like-button img").attr("src", "images/heart-filled.svg");
+        $("#like-button").addClass("liked");
+    
+      }else{
+        $("#like-button img").attr("src", "images/heart.svg");
+        $("#like-button").removeClass("liked");
+      }
+    
+      
+      
+
+    }
+
   });
 
 });

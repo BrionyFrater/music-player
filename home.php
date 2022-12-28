@@ -75,7 +75,7 @@
                         <img src="<?=$song['cover_pic']?>" class="songImage">
                         <h5 class="songName"><?=$song['name']?></h5>
                         <p class="songArtist"><?=$song['artist']?></p>
-                        <p hidden id="song-liked"><?=$song['liked']?></p>
+                        
                     </a>
                 <?php endforeach; ?>  
             </div>

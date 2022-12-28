@@ -59,7 +59,7 @@
             <ul>
                 <li>
                     
-                    <a href="#">
+                    <a href="#" onclick="getHomePage()">
                         <img src="images/home.svg" alt="Home">
                         Home
                     </a>
@@ -67,7 +67,7 @@
                 </li>
 
                 <li>
-                    <a>
+                    <a href="#" onclick="getLikedSongPage()">
                         <img src="images/heart.svg" alt="Liked songs">
                         Liked Songs
                     </a>
@@ -75,7 +75,7 @@
                 </li>
 
                 <li>
-                    <a>
+                    <a href="#">
                         <img src="images/library.svg" alt="Library">
                         Library
                     </a>
