@@ -59,7 +59,7 @@
             <ul>
                 <li>
                     
-                    <a href="#" onclick="getHomePage()">
+                    <a href="home">
                         <img src="images/home.svg" alt="Home">
                         Home
                     </a>
@@ -67,7 +67,7 @@
                 </li>
 
                 <li>
-                    <a href="#" onclick="getLikedSongPage()">
+                    <a href="likedSongs">
                         <img src="images/heart.svg" alt="Liked songs">
                         Liked Songs
                     </a>
@@ -75,7 +75,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="playlists">
                         <img src="images/library.svg" alt="Library">
                         Library
                     </a>
@@ -85,7 +85,11 @@
             </ul>
         </nav>
         
-        
+        <div id="search-ctn">
+            <label for="hme-search-songs">Search</label>
+            <input type="search" name="hme-search-songs" id="hme-search-songs" placeholder="Songs, Artists, Albums" aria-description="Search for songs, artists and/or albums">
+        </div>
+
         <section id="current-tab">
             <?php
                 require_once 'home.php';

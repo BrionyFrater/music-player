@@ -12,8 +12,8 @@ CREATE TABLE `user_songs` (
   `album` varchar(100) NOT NULL default '',
   `source` varchar(130) NOT NULL default '',
   `liked` varchar(3) NOT NULL default 'NO',
-  `cover_pic` varchar(130) NOT NULL default '',
-  `artist_pic` varchar(130) NOT NULL default 'songs/added/cover_pics/default-artist.png',
+  `cover_pic` varchar(130) NOT NULL default 'songs/added/cover_pics/default-cover.png',
+  `artist_pic` varchar(130) NOT NULL default 'songs/added/artist_pics/default-artist.png',
   `feat_artist` varchar(100) NOT NULL default 'NONE',
 
   PRIMARY KEY  (`id`)
@@ -49,4 +49,21 @@ INSERT INTO `user_songs` VALUES (1, 'Cinderella (feat. Ty Dolla Sign)', 'Mac Mil
 (28, 'The Heart Part 5', 'Kendrick Lamar', 'Mr. Morale and the Big Steppers', 'songs/added/Kendrick Lamar - The Heart Part 5.mp3', 'NO', 'songs/added/cover_pics/kendrick-lamar-mr-morale-and-the-big-steppers.jpeg', 'songs/added/artist_pics/kendrick-lamar.png', 'NONE'),
 (29, 'Father Time (feat. Sampha)', 'Kendrick Lamar', 'Mr. Morale and the Big Steppers', 'songs/added/Kendrick Lamar -Father Time ft Sampha.mp3', 'NO', 'songs/added/cover_pics/kendrick-lamar-mr-morale-and-the-big-steppers.jpeg', 'songs/added/artist_pics/kendrick-lamar.png', 'NONE'),
 (30, 'Auntie Diaries', 'Kendrick Lamar', 'Mr. Morale and the Big Steppers', 'songs/added/Kendrick Lamar - Auntie Diaries.mp3', 'NO', 'songs/added/cover_pics/kendrick-lamar-mr-morale-and-the-big-steppers.jpeg', 'songs/added/artist_pics/kendrick-lamar.png', 'NONE'),
-(31, 'N95', 'Kendrick Lamar', 'Mr. Morale and the Big Steppers', 'songs/added/Kendrick Lamar  - N95.mp3', 'NO', 'songs/added/cover_pics/kendrick-lamar-mr-morale-and-the-big-steppers.jpeg', 'songs/added/artist_pics/kendrick-lamar.png', 'NONE');
+(31, 'N95', 'Kendrick Lamar', 'Mr. Morale and the Big Steppers', 'songs/added/Kendrick Lamar  - N95.mp3', 'NO', 'songs/added/cover_pics/kendrick-lamar-mr-morale-and-the-big-steppers.jpeg', 'songs/added/artist_pics/kendrick-lamar.png', 'NONE'),
+(32, 'Cant Make U Change (feat. Ari Lennox)', 'JID', 'The Forever Story', 'songs/added/Cant Make U Change (feat. Ari Lennox).mp3', 'NO', 'songs/added/cover_pics/jid-the-forever-story.jpg', 'songs/added/artist_pics/jid.png', 'Ari Lennox'),
+(33, 'Cant Punk Me (feat. EARTHGANG)', 'JID', 'The Forever Story', 'songs/added/Cant Punk Me (feat. EARTHGANG).mp3', 'NO', 'songs/added/cover_pics/jid-the-forever-story.jpg', 'songs/added/artist_pics/jid.png', 'EARTHGANG');
+
+
+DROP TABLE IF EXISTS `playlists`;
+CREATE TABLE `playlists` (
+  
+  `name` varchar(100) NOT NULL default '',
+  `songs` varchar(500) NOT NULL default '',
+  
+
+  PRIMARY KEY  (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+
+INSERT INTO `playlists` VALUES ('Chill_Vibes', '4,24,7'),
+('Kenny', '22,24,30,31,16,14,27');

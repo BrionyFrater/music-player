@@ -102,7 +102,27 @@ h2{
   }
 
   
-  
+  .success{
+    position: fixed;
+    top: -400px;
+    width: 15rem;
+    height: 3rem;
+    border-radius: 1rem;
+    letter-spacing: 0.2rem;
+    background-color: rgb(0, 155, 103);
+    color: var(--clr-text);
+    font-size: 2rem;
+    z-index: 8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  form::placeholder{
+    color: var(--clr-text);
+    font-family: var(--fnt-reg);
+    letter-spacing: 0.1rem;
+}
   
 
 /*
@@ -350,6 +370,10 @@ nav a:not(.navActive):hover
     padding: 3rem 3rem 30rem 3rem;
 }
 
+#search-ctn{
+    padding: 3rem;
+}
+
 @media(max-width: 600px){
     header{
         padding: 1rem 1rem 0 1rem;
@@ -357,6 +381,10 @@ nav a:not(.navActive):hover
 
     #current-tab{
         padding: 1rem 1rem 22rem 1rem;
+    }
+
+    #search-ctn{
+        padding: 1rem;
     }
 }
 
@@ -530,6 +558,14 @@ ________________
     
 }
 
+.--flex-left{
+    display: flex;
+    gap: 0.7em;
+    justify-content: flex-start;
+
+    
+}
+
 #like-button, #loop{
     width: 1.5rem;
 }
@@ -550,7 +586,7 @@ HOME PAGE CSS, searchbar
 ==========================
 */
 
-#hme-all-song-contain{
+#hme-all-song-contain, #like-all-song-contain, #artist-all-song-contain, #playlist-all-contain, #new-song-contain{
     padding: 2rem 0rem;
 
     /* From https://css.glass */
@@ -634,6 +670,7 @@ HOME PAGE CSS, searchbar
 .albumLink{
     color: var(--clr-accent);
     border-radius: 1rem;
+    
     
 }
 
@@ -740,6 +777,26 @@ HOME PAGE CSS, searchbar
     
 }
 
+.songOptions{
+    position: relative;
+    z-index: 3;
+    width: 4rem;
+    height: 2rem;
+}
+
+.songOptions img{
+    
+    width: 2rem;
+    transition: 0.3s;
+    
+}
+
+.songOptions:hover img{
+    transition: 0.3s;
+    width: 4rem;
+    filter: invert(40%) sepia(35%) saturate(6603%) hue-rotate(349deg) brightness(100%) contrast(91%);
+}
+
 .artistLink{
     color: var(--clr-accent);
     display: flex;
@@ -757,6 +814,161 @@ HOME PAGE CSS, searchbar
     .albumImage{
         width: 7.5rem;
     }
+}
+
+/*
+==========================
+LIKED PAGE CSS
+==========================
+*/
+
+h2 > img{
+    width: 3rem;
+    
+}
+
+@media only screen and (hover: none){
+
+    h2 > img{
+        width: 1rem;
+        
+    }
+    
+}
+
+#like-all-song-contain, #artist-all-song-contain, #playlist-all-contain, #new-song-contain{
+    height: auto;
+}
+
+#add-new-song{
+    padding: 2rem;
+}
+
+.playCnt{
+    margin-bottom: 3rem;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.playImage{
+    border-radius: 1rem;
+    width: 8rem;
+    height: 8rem;
+
+    transition: 0.5s;
+}
+
+.playName{
+    font-family: var(--fnt-big-bold);
+    color: var(--clr-accent);
+    
+}
+
+#playlist-all-contain{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.playImage:hover{
+    transition: 0.5s;
+    transform: scale(1.13);
+}
+
+.addToPlayForm{
+    border-radius: 1rem;
+    background-color: var(--clr-dark);
+    color: var(--clr-text);
+    display: none;
+    flex-direction: column;
+    padding: 1rem;
+    width: 10rem;
+    max-height: 15rem;
+    position: relative;
+    z-index: 4;
+    top: -6rem;
+    left: 45%;
+    overflow-y: scroll;
+    
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.2rem;
+    background-color: rgb(255, 255, 255);
+}
+
+input[type="checkbox"]:checked{
+    
+    background-color: var(--clr-accent);
+}
+
+input[type="submit"]{
+    border-radius: 0.3rem;
+    background-color: var(--clr-accent);
+    border: none;
+    color: var(--clr-text);
+    width: 7rem;
+    height: 2rem;
+    cursor: pointer;
+}
+
+#new-playlist-form{
+    display: none;
+    
+    
+}
+
+
+
+input[type="text"]{
+    height: 2rem;
+    width: 13rem;
+    border: none;
+    background-color: var(--clr-dark);
+    border-radius: 2rem;
+
+    
+    
+    padding: 0 2rem;
+
+    
+    font-family: var(--fnt-reg);
+    color: var(--clr-text);
+    letter-spacing: 0.1rem;
+
+    
+    margin-bottom: 2rem;
+}
+
+#new{
+    margin-left: 2rem;
+}
+
+input[type="text"]::placeholder{
+    color: var(--clr-text);
+    font-family: var(--fnt-reg);
+    letter-spacing: 0.1rem;
+}
+
+#add-new-song{
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    max-height: 9rem;
+    
+}
+
+#add-new-song input{
+    margin-right: 2rem;
+}
+
+#song-added{
+    padding: 3rem;
+    overflow: hidden;
 }
 
 

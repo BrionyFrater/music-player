@@ -3,6 +3,11 @@
 ============================================
 */
 
+/*
+                NAV BUTTON APPEARANCE
+============================================
+*/
+
 /*TOGGLE the apperance of nav button onclick, works like radio buttons*/
 $("nav > ul > li").click(function () {
 
@@ -33,6 +38,519 @@ $("nav > ul > li").click(function () {
 
 });
 
+
+
+
+/*
+                NAV BUTTON FUNCTIONALITY
+============================================
+*/
+
+//updates the current tab div with contents from another page. All event listners in the relevent div have to be readded because the get request automatically removes them
+$("nav a").click(function (event){
+
+  event.preventDefault();
+  
+
+  $.get( $(this).attr("href") +'.php', {}, function(data, textStatus, jqXHR){
+
+    if(textStatus === 'success'){
+
+      //empty the current tab div and fill it with information from the page that was retrieved
+      $("#current-tab").empty();
+      $("#current-tab").html(data);
+
+
+      /*
+      ============================================
+                      H O M E   P A G E
+      ============================================
+      */
+
+      
+
+      /*
+                      ALBUMS AND ARTISTS
+      ============================================
+      */
+
+      //album carousel
+
+      $("#hme-album-carousel").owlCarousel({
+        autoPlay: true,
+        loop:true,
+        margin: 1,
+        stagePadding: 1,
+        //being responsive
+        itemsDesktopSmall : [980,9],
+        itemsTablet: [920,4],
+        itemsMobile : [499,2]
+
+      });
+
+      //artist carousel
+      $("#hme-all-artists-carousel").owlCarousel({
+        autoPlay: true,
+        loop:true,
+        
+        //being responsive
+        itemsDesktopSmall : [980,5],
+        itemsTablet: [920,3],
+        itemsMobile : [600,2]
+
+      });
+
+
+
+      //play songs from an album when clicked
+      $(".albumLink").click(function(event) {
+
+        event.preventDefault();
+
+        $.get('getAlbum.php', {album: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+          if(textStatus === 'success'){
+            data = JSON.parse(data);
+            
+            let i = 0;
+
+            if(data.lenght != 0){
+              
+              //updates player labels and sources for each song in the queue
+              function updatePlayerInfo(){
+                
+                audio.src = data[i]['source'];
+
+                //replaces the player song name, artist and image with the one that was clicked on
+                $("#player-song-name").text(data[i]['name']);
+                $("#player-artist-name").text(data[i]['artist']);
+                $("#player-cover-photo").attr("src", data[i]['cover_pic']);
+                
+                
+                //checks if the song is apart of liked songs so the user interface can be appropriately updated
+                if(data[i]['liked'] === "YES"){
+                  $("#like-button img").attr("src", "images/heart-filled.svg");
+                  $("#like-button").addClass("liked");
+
+                }else{
+                  $("#like-button img").attr("src", "images/heart.svg");
+                  $("#like-button").removeClass("liked");
+                }
+
+                
+                //simulates clicking the play button, used for usability
+                $("#play-pause").click();
+              }
+              
+              updatePlayerInfo();
+
+              audio.addEventListener('ended', function albumHandler() {
+                audioListner = true;
+                i = i + 1;
+        
+                if(i < data.length){
+                  updatePlayerInfo();
+                }else{
+                  audio.removeEventListener('ended', albumHandler);
+                }
+                
+            });
+            
+              
+            }
+            
+
+          }else{
+            alert('An error has occured');
+          }
+          
+        });
+
+      });
+
+
+      /*
+                      SONGS
+      ============================================
+      */
+
+
+      //plays a song when clicked
+      $(".songLink").click(function(event) {
+
+        event.preventDefault();
+        
+        //  Removes the ended event listner from the audio bar to stop the player from continuing to play the album. 
+        if(audioListner === true){
+          $("#song").off();
+        }
+        
+
+        //replaces the song name, artist and image with the one that was clicked on
+        audio.src = $(this).attr("href");
+        $("#player-song-name").text($(this).find(".songName").text());
+        $("#player-artist-name").text($(this).find(".songArtist").text());
+        $("#player-cover-photo").attr("src", $(this).find(".songImage").attr("src"));
+
+        //simulates clicking the play button, used for usability
+        $("#play-pause").click();
+        
+        //checks if the song is apart of liked songs so the user interface can be appropriately updated
+        $.get('isSongLiked.php', {artist: $(this).find(".songArtist").text(), song: $(this).find(".songName").text()}, function(data, textStatus, jqXHR){
+          
+          if(textStatus === 'success'){
+
+            data = JSON.parse(data);
+
+            
+
+            if(data[0]['liked'] === "YES"){
+              $("#like-button img").attr("src", "images/heart-filled.svg");
+              $("#like-button").addClass("liked");
+          
+            }else{
+              $("#like-button img").attr("src", "images/heart.svg");
+              $("#like-button").removeClass("liked");
+            }
+          
+            
+            
+          }
+
+        });
+
+      });
+
+      //updates the current tab div with artists songs. All event listners in the relevent div have to be readded because the get request automatically removes them
+      $(".artistLink").click(function (event){
+
+        event.preventDefault();
+
+        $.get('getArtist.php', {artist: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+          if(textStatus === 'success'){
+
+            //empty the current tab div and fill it with information from the page that was retrieved
+            $("#current-tab").empty();
+            $("#current-tab").html(data);
+
+
+            /*
+            ============================================
+                            H O M E   P A G E
+            ============================================
+            */
+
+            /*
+                            ALBUMS AND ARTISTS
+            ============================================
+            */
+
+            //album carousel
+
+            $("#hme-album-carousel").owlCarousel({
+              autoPlay: true,
+              loop:true,
+              margin: 1,
+              stagePadding: 1,
+              //being responsive
+              itemsDesktopSmall : [980,9],
+              itemsTablet: [920,4],
+              itemsMobile : [499,2]
+
+            });
+
+            //artist carousel
+            $("#hme-all-artists-carousel").owlCarousel({
+              autoPlay: true,
+              loop:true,
+              
+              //being responsive
+              itemsDesktopSmall : [980,5],
+              itemsTablet: [920,3],
+              itemsMobile : [600,2]
+
+            });
+
+
+
+            //play songs from an album when clicked
+            $(".albumLink").click(function(event) {
+
+              event.preventDefault();
+
+              $.get('getAlbum.php', {album: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+                if(textStatus === 'success'){
+                  data = JSON.parse(data);
+                  
+                  let i = 0;
+
+                  if(data.lenght != 0){
+                    
+                    //updates player labels and sources for each song in the queue
+                    function updatePlayerInfo(){
+                      
+                      audio.src = data[i]['source'];
+
+                      //replaces the player song name, artist and image with the one that was clicked on
+                      $("#player-song-name").text(data[i]['name']);
+                      $("#player-artist-name").text(data[i]['artist']);
+                      $("#player-cover-photo").attr("src", data[i]['cover_pic']);
+                      
+                      
+                      //checks if the song is apart of liked songs so the user interface can be appropriately updated
+                      if(data[i]['liked'] === "YES"){
+                        $("#like-button img").attr("src", "images/heart-filled.svg");
+                        $("#like-button").addClass("liked");
+
+                      }else{
+                        $("#like-button img").attr("src", "images/heart.svg");
+                        $("#like-button").removeClass("liked");
+                      }
+
+                      
+                      //simulates clicking the play button, used for usability
+                      $("#play-pause").click();
+                    }
+                    
+                    updatePlayerInfo();
+
+                    audio.addEventListener('ended', function albumHandler() {
+                      audioListner = true;
+                      i = i + 1;
+              
+                      if(i < data.length){
+                        updatePlayerInfo();
+                      }else{
+                        audio.removeEventListener('ended', albumHandler);
+                      }
+                      
+                  });
+                  
+                    
+                  }
+                  
+
+                }else{
+                  alert('An error has occured');
+                }
+                
+              });
+
+            });
+
+
+            /*
+                            SONGS
+            ============================================
+            */
+
+
+            //plays a song when clicked
+            $(".songLink").click(function(event) {
+
+              event.preventDefault();
+              
+              //  Removes the ended event listner from the audio bar to stop the player from continuing to play the album. 
+              if(audioListner === true){
+                $("#song").off();
+              }
+              
+
+              //replaces the song name, artist and image with the one that was clicked on
+              audio.src = $(this).attr("href");
+              $("#player-song-name").text($(this).find(".songName").text());
+              $("#player-artist-name").text($(this).find(".songArtist").text());
+              $("#player-cover-photo").attr("src", $(this).find(".songImage").attr("src"));
+
+              //simulates clicking the play button, used for usability
+              $("#play-pause").click();
+              
+              //checks if the song is apart of liked songs so the user interface can be appropriately updated
+              $.get('isSongLiked.php', {artist: $(this).find(".songArtist").text(), song: $(this).find(".songName").text()}, function(data, textStatus, jqXHR){
+                
+                if(textStatus === 'success'){
+
+                  data = JSON.parse(data);
+
+                  
+
+                  if(data[0]['liked'] === "YES"){
+                    $("#like-button img").attr("src", "images/heart-filled.svg");
+                    $("#like-button").addClass("liked");
+                
+                  }else{
+                    $("#like-button img").attr("src", "images/heart.svg");
+                    $("#like-button").removeClass("liked");
+                  }
+                
+                  
+                  
+                }
+
+              });
+
+            });
+
+          }
+
+        });
+
+      });
+
+      //PLAYLISTS
+
+      
+
+      //play songs from an playlist when clicked
+      $(".playLink").click(function(event) {
+
+        event.preventDefault();
+
+        $.get('getPlaylist.php', {playlist: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+          if(textStatus === 'success'){
+            data = JSON.parse(data);
+            
+            let i = 0;
+
+            if(data.lenght != 0){
+              
+              //updates player labels and sources for each song in the queue
+              function updatePlayerInfo(){
+                
+                audio.src = data[i]['source'];
+
+                //replaces the player song name, artist and image with the one that was clicked on
+                $("#player-song-name").text(data[i]['name']);
+                $("#player-artist-name").text(data[i]['artist']);
+                $("#player-cover-photo").attr("src", data[i]['cover_pic']);
+                
+                
+                //checks if the song is apart of liked songs so the user interface can be appropriately updated
+                if(data[i]['liked'] === "YES"){
+                  $("#like-button img").attr("src", "images/heart-filled.svg");
+                  $("#like-button").addClass("liked");
+
+                }else{
+                  $("#like-button img").attr("src", "images/heart.svg");
+                  $("#like-button").removeClass("liked");
+                }
+
+                
+                //simulates clicking the play button, used for usability
+                $("#play-pause").click();
+              }
+              
+              updatePlayerInfo();
+
+              audioListner = true;
+              audio.addEventListener('ended', function albumHandler() {
+                
+                i = i + 1;
+        
+                if(i < data.length){
+                  updatePlayerInfo();
+                }else{
+                  audio.removeEventListener('ended', albumHandler);
+                }
+                
+            });
+            
+              
+            }
+            
+
+          }else{
+            alert('An error has occured');
+          }
+          
+        });
+
+      });
+
+      $(".songOptions").click(function(){
+        //selects hidden playlist menu
+        $(this).parent().next().find(".addToPlayForm").css('display', 'flex');
+        
+        
+      });
+      
+      
+      $(".addToPlayForm").on("submit", function(event){
+      
+        
+        
+        $(this).css('display', 'none');
+      
+        $.ajax({
+          type: "POST",
+          url: "addToPlaylist.php",
+          data: $(this).serialize(),
+          success: function() {
+            gsap.to(".success", {duration: 1, y: 400, ease:"power4.inOut"});
+            gsap.to(".success", {duration: 1, y: -400, ease:"power4.inOut", delay: 4});
+          }
+        });
+      
+      
+        event.preventDefault();
+      });
+
+      $("#new-playlist-form").on("submit", function(event){
+
+        
+        gsap.to("#new-playlist-form", {duration: 1, y: -40, opacity: 0, ease:"power4.inOut", display: "none"});
+        
+             
+        $.ajax({
+          type: "POST",
+          url: "newPlaylist.php",
+          data: $(this).serialize(),
+          success: function() {
+            $(".success").empty();
+            $(".success").html("<h6>Playlist created</h6>");
+            gsap.to(".success", {duration: 1, y: 400, ease:"power4.inOut"});
+            gsap.to(".success", {duration: 1, y: -400, ease:"power4.inOut", delay: 4});
+              
+          }
+        });
+      
+      
+        event.preventDefault();
+      });
+
+      // $("#add-new-song").on("submit", function(event){
+
+       
+      //   $.ajax({
+      //     type: "POST",
+      //     url: "newSong.php",
+      //     data: new FormData("#add-new-song"),
+      //     processData: false,
+      //     contentType: false,
+      //     success: function() {
+      //       $(".success").empty();
+      //       $(".success").html("<h6>Song added</h6>");
+      //       gsap.to(".success", {duration: 1, y: 400, ease:"power4.inOut"});
+      //       gsap.to(".success", {duration: 1, y: -400, ease:"power4.inOut", delay: 4});
+      //       $("#add-new-song")[0].reset();
+      //     }
+      //   });
+      
+      
+      //   event.preventDefault();
+      // });
+      
+
+    }
+
+  });
+
+});
+
+
 /*
                 AUDIO CONTROLS
 ============================================
@@ -47,7 +565,7 @@ let seekBar = document.getElementById("seek-bar");
 //sets the first song to white ferrari by frank ocean
 audio.src = "songs/added/Frank Ocean - White Ferrari.mp3";
 
-audioListner = false;
+var audioListner = false;
 
 audio.onloadedmetadata = function() {
   document.getElementById("seek-bar-duration").innerHTML = formatTime(audio.duration);
@@ -186,7 +704,7 @@ $("#hme-album-carousel").owlCarousel({
   //being responsive
   itemsDesktopSmall : [980,9],
   itemsTablet: [920,4],
-  itemsMobile : [499,3]
+  itemsMobile : [499,2]
 
 });
 
@@ -246,8 +764,9 @@ $(".albumLink").click(function(event) {
         
         updatePlayerInfo();
 
+        audioListner = true;
         audio.addEventListener('ended', function albumHandler() {
-          audioListner = true;
+          
           i = i + 1;
   
           if(i < data.length){
@@ -283,8 +802,11 @@ $(".songLink").click(function(event) {
   event.preventDefault();
   
   //  Removes the ended event listner from the audio bar to stop the player from continuing to play the album. 
+  
   if(audioListner === true){
+    
     $("#song").off();
+    audioListner = false;
   }
   
 
@@ -298,11 +820,13 @@ $(".songLink").click(function(event) {
   $("#play-pause").click();
   
   //checks if the song is apart of liked songs so the user interface can be appropriately updated
-  $.get('getAlbum.php', {artist: $(this).find(".songName").text(), song: $(this).find(".songArtist").text()}, function(data, textStatus, jqXHR){
+  $.get('isSongLiked.php', {artist: $(this).find(".songArtist").text(), song: $(this).find(".songName").text()}, function(data, textStatus, jqXHR){
     
-    if(textStatus === 'success' && data.lenght > 0){
+    if(textStatus === 'success'){
 
       data = JSON.parse(data);
+
+      
 
       if(data[0]['liked'] === "YES"){
         $("#like-button img").attr("src", "images/heart-filled.svg");
@@ -315,9 +839,646 @@ $(".songLink").click(function(event) {
     
       
       
+    }
+
+  });
+
+});
+
+
+/*
+                ARTIST BUTTON FUNCTIONALITY
+============================================
+*/
+
+//updates the current tab div with artists songs. All event listners in the relevent div have to be readded because the get request automatically removes them
+$(".artistLink").click(function (event){
+
+  event.preventDefault();
+
+  $.get('getArtist.php', {artist: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+    if(textStatus === 'success'){
+
+      //empty the current tab div and fill it with information from the page that was retrieved
+      $("#current-tab").empty();
+      $("#current-tab").html(data);
+
+
+      /*
+      ============================================
+                      H O M E   P A G E
+      ============================================
+      */
+
+      /*
+                      ALBUMS AND ARTISTS
+      ============================================
+      */
+
+      //album carousel
+
+      $("#hme-album-carousel").owlCarousel({
+        autoPlay: true,
+        loop:true,
+        margin: 1,
+        stagePadding: 1,
+        //being responsive
+        itemsDesktopSmall : [980,9],
+        itemsTablet: [920,4],
+        itemsMobile : [499,2]
+
+      });
+
+      //artist carousel
+      $("#hme-all-artists-carousel").owlCarousel({
+        autoPlay: true,
+        loop:true,
+        
+        //being responsive
+        itemsDesktopSmall : [980,5],
+        itemsTablet: [920,3],
+        itemsMobile : [600,2]
+
+      });
+
+
+
+      //play songs from an album when clicked
+      $(".albumLink").click(function(event) {
+
+        event.preventDefault();
+
+        $.get('getAlbum.php', {album: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+          if(textStatus === 'success'){
+            data = JSON.parse(data);
+            
+            let i = 0;
+
+            if(data.lenght != 0){
+              
+              //updates player labels and sources for each song in the queue
+              function updatePlayerInfo(){
+                
+                audio.src = data[i]['source'];
+
+                //replaces the player song name, artist and image with the one that was clicked on
+                $("#player-song-name").text(data[i]['name']);
+                $("#player-artist-name").text(data[i]['artist']);
+                $("#player-cover-photo").attr("src", data[i]['cover_pic']);
+                
+                
+                //checks if the song is apart of liked songs so the user interface can be appropriately updated
+                if(data[i]['liked'] === "YES"){
+                  $("#like-button img").attr("src", "images/heart-filled.svg");
+                  $("#like-button").addClass("liked");
+
+                }else{
+                  $("#like-button img").attr("src", "images/heart.svg");
+                  $("#like-button").removeClass("liked");
+                }
+
+                
+                //simulates clicking the play button, used for usability
+                $("#play-pause").click();
+              }
+              
+              updatePlayerInfo();
+
+              audio.addEventListener('ended', function albumHandler() {
+                audioListner = true;
+                i = i + 1;
+        
+                if(i < data.length){
+                  updatePlayerInfo();
+                }else{
+                  audio.removeEventListener('ended', albumHandler);
+                }
+                
+            });
+            
+              
+            }
+            
+
+          }else{
+            alert('An error has occured');
+          }
+          
+        });
+
+      });
+
+
+      /*
+                      SONGS
+      ============================================
+      */
+
+
+      //plays a song when clicked
+      $(".songLink").click(function(event) {
+
+        event.preventDefault();
+        
+        //  Removes the ended event listner from the audio bar to stop the player from continuing to play the album. 
+        if(audioListner === true){
+          $("#song").off();
+        }
+        
+
+        //replaces the song name, artist and image with the one that was clicked on
+        audio.src = $(this).attr("href");
+        $("#player-song-name").text($(this).find(".songName").text());
+        $("#player-artist-name").text($(this).find(".songArtist").text());
+        $("#player-cover-photo").attr("src", $(this).find(".songImage").attr("src"));
+
+        //simulates clicking the play button, used for usability
+        $("#play-pause").click();
+        
+        //checks if the song is apart of liked songs so the user interface can be appropriately updated
+        $.get('isSongLiked.php', {artist: $(this).find(".songArtist").text(), song: $(this).find(".songName").text()}, function(data, textStatus, jqXHR){
+          
+          if(textStatus === 'success'){
+
+            data = JSON.parse(data);
+
+            
+
+            if(data[0]['liked'] === "YES"){
+              $("#like-button img").attr("src", "images/heart-filled.svg");
+              $("#like-button").addClass("liked");
+          
+            }else{
+              $("#like-button img").attr("src", "images/heart.svg");
+              $("#like-button").removeClass("liked");
+            }
+          
+            
+            
+          }
+
+        });
+
+      });
 
     }
 
   });
 
+});
+
+/*
+                SHOW PLAYLIST OPTIONS ADD TO PLAYLIST
+============================================
+*/
+
+$("#new-playlist-form").css('display', 'none');
+
+$(".songOptions").click(function(){
+  //selects hidden playlist menu
+  $(this).parent().next().find(".addToPlayForm").css('display', 'flex');
+  
+  
+});
+
+
+$(".addToPlayForm").on("submit", function(event){
+
+  
+  
+  $(this).css('display', 'none');
+
+  $.ajax({
+    type: "POST",
+    url: "addToPlaylist.php",
+    data: $(this).serialize(),
+    success: function() {
+      gsap.to(".success", {duration: 1, y: 400, ease:"power4.inOut"});
+      gsap.to(".success", {duration: 1, y: -400, ease:"power4.inOut", delay: 4});
+    }
+  });
+
+
+  event.preventDefault();
+});
+
+
+$("#new-playlist-form").on("submit", function(event){
+
+  
+  gsap.to("#new-playlist-form", {duration: 1, y: -40, opacity: 0, ease:"power4.inOut", display: "none"});
+       
+  $.ajax({
+    type: "POST",
+    url: "newPlaylist.php",
+    data: $(this).serialize(),
+    success: function() {
+      $(".success").empty();
+      $(".success").html("<h6>Playlist created</h6>");
+      gsap.to(".success", {duration: 1, y: 400, ease:"power4.inOut"});
+      gsap.to(".success", {duration: 1, y: -400, ease:"power4.inOut", delay: 4});
+    }
+  });
+
+
+  event.preventDefault();
+});
+
+function newPlaylistFormReveal(){
+  $("#new-playlist-form").css('display', 'block');
+  $("#new-playlist-form").css('opacity', '1');
+  gsap.from("#new-playlist-form", {duration: 1, y: 40, opacity: 0, ease:"power4.inOut", display: "block"});
+  
+  
+}
+
+
+//updates the current tab on searchbar input
+$("#hme-search-songs").on('input', function (event){
+
+  //slight delay to limit the amount of requests sent in the live search
+  setTimeout(() => {
+
+    $.get('search.php', {term: $(this).val()}, function(data, textStatus, jqXHR){
+
+      if(textStatus === 'success'){
+  
+        //empty the current tab div and fill it with information from the page that was retrieved
+        $("#current-tab").empty();
+        $("#current-tab").html(data);
+
+          /*
+        ============================================
+                        H O M E   P A G E
+        ============================================
+        */
+
+        
+
+        /*
+                        ALBUMS AND ARTISTS
+        ============================================
+        */
+
+        //album carousel
+
+        $("#hme-album-carousel").owlCarousel({
+          autoPlay: true,
+          loop:true,
+          margin: 1,
+          stagePadding: 1,
+          //being responsive
+          itemsDesktopSmall : [980,9],
+          itemsTablet: [920,4],
+          itemsMobile : [499,2]
+
+        });
+
+        //artist carousel
+        $("#hme-all-artists-carousel").owlCarousel({
+          autoPlay: true,
+          loop:true,
+          
+          //being responsive
+          itemsDesktopSmall : [980,5],
+          itemsTablet: [920,3],
+          itemsMobile : [600,2]
+
+        });
+
+
+
+        //play songs from an album when clicked
+        $(".albumLink").click(function(event) {
+
+          event.preventDefault();
+
+          $.get('getAlbum.php', {album: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+            if(textStatus === 'success'){
+              data = JSON.parse(data);
+              
+              let i = 0;
+
+              if(data.lenght != 0){
+                
+                //updates player labels and sources for each song in the queue
+                function updatePlayerInfo(){
+                  
+                  audio.src = data[i]['source'];
+
+                  //replaces the player song name, artist and image with the one that was clicked on
+                  $("#player-song-name").text(data[i]['name']);
+                  $("#player-artist-name").text(data[i]['artist']);
+                  $("#player-cover-photo").attr("src", data[i]['cover_pic']);
+                  
+                  
+                  //checks if the song is apart of liked songs so the user interface can be appropriately updated
+                  if(data[i]['liked'] === "YES"){
+                    $("#like-button img").attr("src", "images/heart-filled.svg");
+                    $("#like-button").addClass("liked");
+
+                  }else{
+                    $("#like-button img").attr("src", "images/heart.svg");
+                    $("#like-button").removeClass("liked");
+                  }
+
+                  
+                  //simulates clicking the play button, used for usability
+                  $("#play-pause").click();
+                }
+                
+                updatePlayerInfo();
+
+                audio.addEventListener('ended', function albumHandler() {
+                  audioListner = true;
+                  i = i + 1;
+          
+                  if(i < data.length){
+                    updatePlayerInfo();
+                  }else{
+                    audio.removeEventListener('ended', albumHandler);
+                  }
+                  
+              });
+              
+                
+              }
+              
+
+            }else{
+              alert('An error has occured');
+            }
+            
+          });
+
+        });
+
+
+        /*
+                        SONGS
+        ============================================
+        */
+
+
+        //plays a song when clicked
+        $(".songLink").click(function(event) {
+
+          event.preventDefault();
+          
+          //  Removes the ended event listner from the audio bar to stop the player from continuing to play the album. 
+          if(audioListner === true){
+            $("#song").off();
+          }
+          
+
+          //replaces the song name, artist and image with the one that was clicked on
+          audio.src = $(this).attr("href");
+          $("#player-song-name").text($(this).find(".songName").text());
+          $("#player-artist-name").text($(this).find(".songArtist").text());
+          $("#player-cover-photo").attr("src", $(this).find(".songImage").attr("src"));
+
+          //simulates clicking the play button, used for usability
+          $("#play-pause").click();
+          
+          //checks if the song is apart of liked songs so the user interface can be appropriately updated
+          $.get('isSongLiked.php', {artist: $(this).find(".songArtist").text(), song: $(this).find(".songName").text()}, function(data, textStatus, jqXHR){
+            
+            if(textStatus === 'success'){
+
+              data = JSON.parse(data);
+
+              
+
+              if(data[0]['liked'] === "YES"){
+                $("#like-button img").attr("src", "images/heart-filled.svg");
+                $("#like-button").addClass("liked");
+            
+              }else{
+                $("#like-button img").attr("src", "images/heart.svg");
+                $("#like-button").removeClass("liked");
+              }
+            
+              
+              
+            }
+
+          });
+
+        });
+
+        //updates the current tab div with artists songs. All event listners in the relevent div have to be readded because the get request automatically removes them
+        $(".artistLink").click(function (event){
+
+          event.preventDefault();
+
+          $.get('getArtist.php', {artist: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+            if(textStatus === 'success'){
+
+              //empty the current tab div and fill it with information from the page that was retrieved
+              $("#current-tab").empty();
+              $("#current-tab").html(data);
+
+
+              /*
+              ============================================
+                              H O M E   P A G E
+              ============================================
+              */
+
+              /*
+                              ALBUMS AND ARTISTS
+              ============================================
+              */
+
+              //album carousel
+
+              $("#hme-album-carousel").owlCarousel({
+                autoPlay: true,
+                loop:true,
+                margin: 1,
+                stagePadding: 1,
+                //being responsive
+                itemsDesktopSmall : [980,9],
+                itemsTablet: [920,4],
+                itemsMobile : [499,2]
+
+              });
+
+              //artist carousel
+              $("#hme-all-artists-carousel").owlCarousel({
+                autoPlay: true,
+                loop:true,
+                
+                //being responsive
+                itemsDesktopSmall : [980,5],
+                itemsTablet: [920,3],
+                itemsMobile : [600,2]
+
+              });
+
+
+
+              //play songs from an album when clicked
+              $(".albumLink").click(function(event) {
+
+                event.preventDefault();
+
+                $.get('getAlbum.php', {album: $(this).attr("href")}, function(data, textStatus, jqXHR){
+
+                  if(textStatus === 'success'){
+                    data = JSON.parse(data);
+                    
+                    let i = 0;
+
+                    if(data.lenght != 0){
+                      
+                      //updates player labels and sources for each song in the queue
+                      function updatePlayerInfo(){
+                        
+                        audio.src = data[i]['source'];
+
+                        //replaces the player song name, artist and image with the one that was clicked on
+                        $("#player-song-name").text(data[i]['name']);
+                        $("#player-artist-name").text(data[i]['artist']);
+                        $("#player-cover-photo").attr("src", data[i]['cover_pic']);
+                        
+                        
+                        //checks if the song is apart of liked songs so the user interface can be appropriately updated
+                        if(data[i]['liked'] === "YES"){
+                          $("#like-button img").attr("src", "images/heart-filled.svg");
+                          $("#like-button").addClass("liked");
+
+                        }else{
+                          $("#like-button img").attr("src", "images/heart.svg");
+                          $("#like-button").removeClass("liked");
+                        }
+
+                        
+                        //simulates clicking the play button, used for usability
+                        $("#play-pause").click();
+                      }
+                      
+                      updatePlayerInfo();
+
+                      audio.addEventListener('ended', function albumHandler() {
+                        audioListner = true;
+                        i = i + 1;
+                
+                        if(i < data.length){
+                          updatePlayerInfo();
+                        }else{
+                          audio.removeEventListener('ended', albumHandler);
+                        }
+                        
+                    });
+                    
+                      
+                    }
+                    
+
+                  }else{
+                    alert('An error has occured');
+                  }
+                  
+                });
+
+              });
+
+
+              /*
+                              SONGS
+              ============================================
+              */
+
+
+              //plays a song when clicked
+              $(".songLink").click(function(event) {
+
+                event.preventDefault();
+                
+                //  Removes the ended event listner from the audio bar to stop the player from continuing to play the album. 
+                if(audioListner === true){
+                  $("#song").off();
+                }
+                
+
+                //replaces the song name, artist and image with the one that was clicked on
+                audio.src = $(this).attr("href");
+                $("#player-song-name").text($(this).find(".songName").text());
+                $("#player-artist-name").text($(this).find(".songArtist").text());
+                $("#player-cover-photo").attr("src", $(this).find(".songImage").attr("src"));
+
+                //simulates clicking the play button, used for usability
+                $("#play-pause").click();
+                
+                //checks if the song is apart of liked songs so the user interface can be appropriately updated
+                $.get('isSongLiked.php', {artist: $(this).find(".songArtist").text(), song: $(this).find(".songName").text()}, function(data, textStatus, jqXHR){
+                  
+                  if(textStatus === 'success'){
+
+                    data = JSON.parse(data);
+
+                    
+
+                    if(data[0]['liked'] === "YES"){
+                      $("#like-button img").attr("src", "images/heart-filled.svg");
+                      $("#like-button").addClass("liked");
+                  
+                    }else{
+                      $("#like-button img").attr("src", "images/heart.svg");
+                      $("#like-button").removeClass("liked");
+                    }
+                  
+                    
+                    
+                  }
+
+                });
+
+              });
+
+            }
+
+          });
+
+        });
+
+        $(".songOptions").click(function(){
+          //selects hidden playlist menu
+          $(this).parent().next().find(".addToPlayForm").css('display', 'flex');
+          
+          
+        });
+        
+        
+        $(".addToPlayForm").on("submit", function(event){
+        
+          
+          
+          $(this).css('display', 'none');
+        
+          $.ajax({
+            type: "POST",
+            url: "addToPlaylist.php",
+            data: $(this).serialize(),
+            success: function() {
+              gsap.to(".success", {duration: 1, y: 400, ease:"power4.inOut"});
+              gsap.to(".success", {duration: 1, y: -400, ease:"power4.inOut", delay: 4});
+            }
+          });
+        
+        
+          event.preventDefault();
+        });
+  
+      }
+    
+    });
+
+  }, 500);
+  
 });
