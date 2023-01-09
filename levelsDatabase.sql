@@ -51,7 +51,8 @@ INSERT INTO `user_songs` VALUES (1, 'Cinderella (feat. Ty Dolla Sign)', 'Mac Mil
 (30, 'Auntie Diaries', 'Kendrick Lamar', 'Mr. Morale and the Big Steppers', 'songs/added/Kendrick Lamar - Auntie Diaries.mp3', 'NO', 'songs/added/cover_pics/kendrick-lamar-mr-morale-and-the-big-steppers.jpeg', 'songs/added/artist_pics/kendrick-lamar.png', 'NONE'),
 (31, 'N95', 'Kendrick Lamar', 'Mr. Morale and the Big Steppers', 'songs/added/Kendrick Lamar  - N95.mp3', 'NO', 'songs/added/cover_pics/kendrick-lamar-mr-morale-and-the-big-steppers.jpeg', 'songs/added/artist_pics/kendrick-lamar.png', 'NONE'),
 (32, 'Cant Make U Change (feat. Ari Lennox)', 'JID', 'The Forever Story', 'songs/added/Cant Make U Change (feat. Ari Lennox).mp3', 'NO', 'songs/added/cover_pics/jid-the-forever-story.jpg', 'songs/added/artist_pics/jid.png', 'Ari Lennox'),
-(33, 'Cant Punk Me (feat. EARTHGANG)', 'JID', 'The Forever Story', 'songs/added/Cant Punk Me (feat. EARTHGANG).mp3', 'NO', 'songs/added/cover_pics/jid-the-forever-story.jpg', 'songs/added/artist_pics/jid.png', 'EARTHGANG');
+(33, 'Cant Punk Me (feat. EARTHGANG)', 'JID', 'The Forever Story', 'songs/added/Cant Punk Me (feat. EARTHGANG).mp3', 'NO', 'songs/added/cover_pics/jid-the-forever-story.jpg', 'songs/added/artist_pics/jid.png', 'EARTHGANG'),
+(34, 'Sing About Me, Im Dying of Thirst', 'Kendrick Lamar', 'good kid m.A.A.d city', 'songs/added/Sing About Me Im Dying Of Thirst.mp3', 'NO', 'songs/added/cover_pics/kendrick-lamar-good-kid-maad-city.png', 'songs/added/artist_pics/kendrick-lamar.png', 'NONE');
 
 
 DROP TABLE IF EXISTS `playlists`;
