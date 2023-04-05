@@ -17,7 +17,7 @@ https://drive.google.com/file/d/1vwg1noJPf8eLSVJpUYHwmLrviJBkuRSf/view?usp=shari
 Responsiveness 
 https://user-images.githubusercontent.com/114207468/212218460-cf67760e-beb2-4e6b-b1d5-b36df030a7b8.mp4
 
-** Screenshots 
+## Screenshots 
 
 
 ![Screen Shot 2023-04-05 at 12 11 55 PM](https://user-images.githubusercontent.com/114207468/230176480-54f92470-361c-4716-91d9-8b260be61977.png)
