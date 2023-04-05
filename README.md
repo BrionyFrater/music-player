@@ -9,7 +9,7 @@
 * Categorize songs by albums, artists, liked, and playlists
 
 
-Full Demo
+Demo
 https://drive.google.com/file/d/1vwg1noJPf8eLSVJpUYHwmLrviJBkuRSf/view?usp=sharing
 
 
