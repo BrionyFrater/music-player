@@ -9,12 +9,14 @@
 * Categorize songs by albums, artists, liked, and playlists
 
 
-Demo
+## Demos
+
+Full Demo
 https://drive.google.com/file/d/1vwg1noJPf8eLSVJpUYHwmLrviJBkuRSf/view?usp=sharing
 
 
 
-Responsiveness 
+Responsiveness Demo
 https://user-images.githubusercontent.com/114207468/212218460-cf67760e-beb2-4e6b-b1d5-b36df030a7b8.mp4
 
 ## Screenshots 
